@@ -1,0 +1,2 @@
+import chardet
+import os
