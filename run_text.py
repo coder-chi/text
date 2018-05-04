@@ -1,2 +1,3 @@
-import chardet
 import os
+
+
