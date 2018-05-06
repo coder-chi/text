@@ -6,9 +6,9 @@ CODES = ['UTF-8', 'UTF-16', 'GB18030', 'BIG5']
 # UTF-8 BOM前缀字节
 UTF_8_BOM = b'\xef\xbb\xbf'
 
-base_dir = 'TEXT'
+base_dir = 'data/TEXT'
 
-utf_dir = 'UTF-TEXT'
+utf_dir = 'data/UTF-TEXT'
 
 # 获取字符编码类型
 def string_encoding(b: bytes):
@@ -29,6 +29,8 @@ def file_encoding(file_path):
     """
     with open(file_path, 'rb') as f:
         return string_encoding(f.read())
+
+# 改变文件的编码
 def file_change(file_path):
     print(file_path)
     enc = file_encoding(file_path)
@@ -39,7 +41,7 @@ def file_change(file_path):
     with open(write_path, 'w') as f:
         f.write(text)
 
-
+# 改变文件夹中所有文件的编码
 def folder_change():
     for root, dirs, files in os.walk(base_dir):
         for name in files:
@@ -50,7 +52,7 @@ def folder_change():
                 write_path = os.path.join(utf_dir, name)
                 with open(read_path, 'rb') as f:
                     b = f.read()
-                    text = b.decode("GB18030")
+                    text = b.decode(enc)
                 with open(write_path, 'w') as f:
                     f.write(text)
             else:
